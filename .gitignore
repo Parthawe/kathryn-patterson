@@ -1,0 +1,10 @@
+node_modules/
+.cache/
+.codex-preview/
+.DS_Store
+*.log
+PLAN_FOR_KATHRYN.md
+CASE_STUDY_WORKBOOK.md
+RESEARCH_AND_BUILD_NOTES.md
+.env
+.env.*
