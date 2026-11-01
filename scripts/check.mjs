@@ -17,7 +17,8 @@ for (const file of html) {
     const link=match[1];
     if (/^(https?:|mailto:|data:)/.test(link)) continue;
     assert(!link.startsWith('/'),`Root-absolute path breaks GitHub Pages: ${link}`);
-    const [path,fragment]=link.split('#');
+    const [pathname,fragment]=link.split('#');
+    const path=pathname.split('?')[0];
     let target=path?resolve(dirname(file),path):file;
     if (path.endsWith('/')) target=resolve(target,'index.html');
     assert(target.startsWith(base),`Path escapes build: ${target}`);
@@ -25,6 +26,14 @@ for (const file of html) {
     if (fragment && extname(target)==='.html') assert((await readFile(target,'utf8')).includes(`id="${fragment}"`),`Missing anchor ${link}`);
   }
   for(const match of text.matchAll(/<img\b[^>]*>/g)) assert(/\balt="[^"]*"/.test(match[0]),`Missing image alt in ${file}`);
+  const ids=[...text.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+  assert.equal(ids.length,new Set(ids).size,`Duplicate element IDs: ${file}`);
+  for(const match of text.matchAll(/aria-(?:controls|labelledby)="([^"]+)"/g)) {
+    for(const id of match[1].split(' ')) assert(ids.includes(id),`Missing ARIA target ${id}: ${file}`);
+  }
+  assert(!/<figcaption>\s*<\/figcaption>/.test(text),`Empty caption: ${file}`);
+  assert.match(text,/styles\.css\?v=[a-f0-9]{12}/,`Stylesheet cache version missing: ${file}`);
+  assert.match(text,/app\.js\?v=[a-f0-9]{12}/,`Script cache version missing: ${file}`);
 }
 for(const file of all) assert((await stat(file)).size<25*1024*1024,`Oversized published file: ${file}`);
 for(const name of ['PLAN_FOR_KATHRYN.md','CASE_STUDY_WORKBOOK.md','RESEARCH_AND_BUILD_NOTES.md','.env','package.json']) assert(!all.some(p=>p.endsWith('/'+name)),`Internal file published: ${name}`);

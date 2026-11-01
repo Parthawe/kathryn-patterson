@@ -20,6 +20,8 @@ Place a web-sized image in `assets/images/` and reference it from `src/render.mj
 
 For a full-size project figure, use the existing `imageFigure` helper. It connects the image to the keyboard-accessible enlargement viewer.
 
+The helper records each image's dimensions. Add the new image's actual width and height to its dimension map. The viewer supplies loading and failure messages, a retry button, and a link to the original file.
+
 ## Add more case-study detail
 
 Central Dispatch currently contains a public overview. Expand it when Kathryn provides her specific responsibilities, decisions, constraints, approved artifacts, and supported results. Do not turn a public product description into a claim that she designed every shown screen.

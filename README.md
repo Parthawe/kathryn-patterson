@@ -19,7 +19,7 @@ Open http://127.0.0.1:5178/.
 npm run prepare:pages
 ```
 
-The build writes the deployable site to `docs/`. The checker validates local links and fragments, page metadata, image descriptions, GitHub Pages path handling, and the separation of private notes from published files.
+The build writes the deployable site to `docs/` and versions CSS and JavaScript URLs from their file contents. The checker validates local links and fragments, page metadata, image descriptions, unique IDs, ARIA targets, asset versions, GitHub Pages path handling, and the separation of private notes from published files.
 
 ## Pages
 
@@ -30,7 +30,7 @@ The build writes the deployable site to `docs/`. The checker validates local lin
 - `/about/`: professional introduction and portrait.
 - `/site-info/`: sources, image credits, privacy, and accessibility information.
 
-The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, keyboard-operable research tabs, and an image viewer with focus restoration.
+The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, keyboard-operable research tabs, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. Mobile navigation and all research findings remain available without JavaScript.
 
 ## Edit
 

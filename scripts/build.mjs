@@ -1,4 +1,5 @@
-import { mkdir, rm, cp, writeFile } from 'node:fs/promises';
+import { mkdir, rm, cp, writeFile, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { resolve, dirname } from 'node:path';
 import { renderPages, pages } from '../src/render.mjs';
 import { site } from '../src/content.mjs';
@@ -6,7 +7,11 @@ import { site } from '../src/content.mjs';
 const output = resolve('docs');
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const page of renderPages()) {
+const versions = {};
+for (const [key, file] of [['css', 'styles.css'], ['js', 'app.js']]) {
+  versions[key] = createHash('sha256').update(await readFile(file)).digest('hex').slice(0, 12);
+}
+for (const page of renderPages(versions)) {
   const target = resolve(output, page.path);
   await mkdir(dirname(target), { recursive: true });
   await writeFile(target, page.html);
