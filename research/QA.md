@@ -31,3 +31,9 @@ The transparent hero derivative was checked in light mode so that the original d
 These are targeted browser and build checks, not an accessibility certification or a complete device matrix. No Lighthouse score is claimed. Public copy intentionally omits unsupported performance claims, a résumé file that was not supplied, and unpublished project details.
 
 The publishing handoff requires a successful GitHub Pages build and a check of the actual live URLs. Record the initial release commit and verify the published homepage and direct project routes after pushing.
+
+## Initial live release
+
+The repository was created at https://github.com/Parthawe/kathryn-patterson with Pages configured for `main:/docs`. Initial release commit: `6cd7f29f337089553c91ff5285abbf56abd0f72d`. GitHub's pages-build-deployment run `41327346769` completed successfully.
+
+The six live page routes returned HTTP 200, as did the hero image, body font, stylesheet, and JavaScript file. Browser verification of the live homepage confirmed its title, loaded images, and absence of horizontal overflow. Final artwork sizing was reduced within its grid cell to preserve the complete sculpture rather than relying on clipping. The custom domain remains unconfigured.
