@@ -30,14 +30,15 @@ The build writes the deployable site to `docs/` and versions CSS and JavaScript 
 - `/about/`: professional introduction and portrait.
 - `/site-info/`: sources, image credits, privacy, and accessibility information.
 
-The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, keyboard-operable research tabs, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. Mobile navigation and all research findings remain available without JavaScript.
+The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. Light mode is the default; the labeled theme control preserves each visitor's choice. Research findings remain visible in a comparison table that reflows on phones. Mobile navigation and all case-study text remain available without JavaScript.
 
 ## Edit
 
 - `src/content.mjs`: public profile fields, source links, project previews, and deployment URL.
 - `src/render.mjs`: shared layout and page content.
+- `src/case-studies.mjs`: case-study layouts, writing, source links, and image figures.
 - `styles.css`: layout, themes, responsive behavior, and visual states.
-- `app.js`: menu, theme preference, research tabs, image viewer, and modest motion.
+- `app.js`: menu, theme preference, case-study section tracking, image viewer, and modest motion.
 - `assets/images/`: optimized published imagery.
 - `assets/fonts/`: self-hosted fonts with their licenses.
 - `research/SOURCES.md`: public source provenance and content limits.

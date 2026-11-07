@@ -3,7 +3,7 @@
 ## Make a content change
 
 1. Open this repository locally or in your coding tool.
-2. Edit the project summaries in `src/content.mjs` or page text in `src/render.mjs`.
+2. Edit project summaries in `src/content.mjs`, case studies in `src/case-studies.mjs`, or other page text in `src/render.mjs`.
 3. Run `npm run dev` to preview it at http://127.0.0.1:5178/.
 4. Review the changed page at desktop and phone widths. Check its links and any controls.
 5. Run `npm run prepare:pages`. Fix any reported errors.
@@ -16,9 +16,9 @@ Useful instruction for a coding assistant:
 
 ## Add an image
 
-Place a web-sized image in `assets/images/` and reference it from `src/render.mjs`. Use a meaningful description for `alt`, set the image's correct dimensions, and credit the source. Keep confidential screens and identifying research-participant data out of public files. Use WebP where practical.
+Place a web-sized image in `assets/images/` and reference it from the page's source module. Use a meaningful description for `alt`, set the image's correct dimensions, and credit the source. Keep confidential screens and identifying research-participant data out of public files. Use WebP where practical.
 
-For a full-size project figure, use the existing `imageFigure` helper. It connects the image to the keyboard-accessible enlargement viewer.
+For a full-size project figure, use the `imageFigure` helper in `src/case-studies.mjs`. It connects the image to the keyboard-accessible enlargement viewer.
 
 The helper records each image's dimensions. Add the new image's actual width and height to its dimension map. The viewer supplies loading and failure messages, a retry button, and a link to the original file.
 

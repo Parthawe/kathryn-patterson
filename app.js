@@ -2,8 +2,10 @@ const root = document.documentElement;
 const themeButton = document.querySelector('.theme-toggle');
 function updateThemeControl() {
   const light = root.dataset.theme === 'light';
-  themeButton?.setAttribute('aria-label', `Switch to ${light ? 'dark' : 'light'} theme`);
-  themeButton?.setAttribute('aria-pressed', String(light));
+  themeButton?.setAttribute('aria-label', `Switch to ${light ? 'dark' : 'light'} mode`);
+  const label = themeButton?.querySelector('.theme-label');
+  if (label) label.textContent = light ? 'Dark mode' : 'Light mode';
+  document.querySelector('meta[name=theme-color]').content = light ? '#f7f6f0' : '#11130f';
 }
 updateThemeControl();
 themeButton?.addEventListener('click', () => {
@@ -74,27 +76,6 @@ if (art && matchMedia('(pointer:fine)').matches) {
     art.style.setProperty('--ry', `${(e.clientX - rect.left - rect.width / 2) / -90}deg`);
   });
   art.addEventListener('pointerleave', () => { art.style.setProperty('--rx', '0deg'); art.style.setProperty('--ry', '0deg'); });
-}
-
-const tabs = [...document.querySelectorAll('.findings [role=tab]')];
-function selectTab(tab, focus = false) {
-  tabs.forEach(item => {
-    const selected = item === tab;
-    item.setAttribute('aria-selected', String(selected)); item.tabIndex = selected ? 0 : -1;
-    document.getElementById(item.getAttribute('aria-controls')).hidden = !selected;
-  });
-  if (focus) tab.focus();
-}
-tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectTab(tab));
-  tab.addEventListener('keydown', e => {
-    const positions = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1 };
-    if (e.key in positions) { e.preventDefault(); selectTab(tabs[positions[e.key]], true); }
-  });
-});
-if (tabs.length) {
-  selectTab(tabs.find(tab => `#${tab.getAttribute('aria-controls')}` === location.hash) || tabs[0]);
-  document.querySelector('.findings-tabs').hidden = false;
 }
 
 const dialog = document.querySelector('.image-dialog');

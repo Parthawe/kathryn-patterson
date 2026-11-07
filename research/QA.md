@@ -49,3 +49,15 @@ Interaction checks confirmed that mobile contact closes the menu and focuses the
 With JavaScript disabled at 390px, mobile navigation was visible, all three research panels were displayed, tab controls were hidden, and the page had no horizontal overflow. JavaScript was reenabled after the test.
 
 The one automated design scan flagged six empty viewer image elements, one per generated page. The viewer now creates its image only when opened. The scan was not rerun. The build checker and JavaScript syntax check passed after these changes.
+
+## November 7 case-study and light-mode revision
+
+Both case studies now pair the introduction with product imagery, followed by a four-part role and context summary. Central Dispatch presents the documented search flow with larger filter and results figures. Cync adds planned study methods and tasks, visible finding/response comparisons, team responsibilities, and the documented scope constraint around shared ratings and reviews. Proposed revisions are not described as measured improvements.
+
+Light mode is the default for a visitor without a saved preference. The visible theme control names the alternative mode. A browser check confirmed the default, switching to dark mode, persistence between project routes, and switching back to light mode.
+
+Desktop review at 1440px covered both project introductions and the Cync research comparison. Phone review at 390px covered both introductions and the reflowed findings. All six routes were checked at 320px and 768px: document width matched viewport width, and no broken completed images were reported. The 320px navigation controls remained within the viewport.
+
+The image viewer opened a Cync screen in its ready state and restored focus when closed. Mobile contact closed the menu and focused the footer. With JavaScript disabled at 320px, fallback navigation and all three research findings remained visible without horizontal overflow. Script execution was restored afterward.
+
+The single design scan for this revision returned no findings. The final build, local-link checker, and syntax checks passed. The prior tab-specific checks above describe the earlier release; this revision replaces tabs with a static comparison table.

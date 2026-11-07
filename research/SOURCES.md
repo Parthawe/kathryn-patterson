@@ -38,6 +38,12 @@ The public copy describes the project and study without claiming a successful pu
 
 The Cync team retains rights to its project material.
 
+### November 7 case-study revision
+
+The research report and plan were read again for the expanded case study. The plan's page 4 supports the proposed interview, survey, and think-aloud methods; page 9 supplies the examples of finding an event, adding it to a calendar, mapping a place, and finding dining. These remain described as planned tasks and methods. The report's pages 3, 5, and 6 support the study size, findings, proposed responses, and shared-review scope constraint. No participant quotes, identifying participant data, or claimed improvement percentages were added.
+
+The Central Dispatch guide was checked again for saved searches, changing filters, result-card fields, and worklist synchronization. The expanded flow describes published product behavior. Kathryn's individual design decisions and screen ownership are still unspecified.
+
 ## Design reference
 
 [designwhich.works](https://designwhich.works/) was inspected in the browser. Its dark surfaces, editorial display type, sculptural hero, direct project navigation, and detailed project presentation informed the new direction. This portfolio uses its own layout, palette, code, artwork, and Kathryn-specific content. It does not reuse Parth's project claims or media.
