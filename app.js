@@ -47,24 +47,45 @@ if ('IntersectionObserver' in window && !motion.matches) {
   document.querySelectorAll('.reveal').forEach(el => { el.classList.add('will-reveal'); observer.observe(el); });
 }
 
-const sectionLinks = [...document.querySelectorAll('.case-sidebar a')];
-if (sectionLinks.length && 'IntersectionObserver' in window) {
-  function markSection(id) {
-    sectionLinks.forEach(link => {
-      if (link.hash === `#${id}`) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    });
+const caseNav = document.querySelector('.case-sidebar');
+const chapters = [...(caseNav?.querySelectorAll('a') ?? [])]
+  .map(link => ({ link, section: document.querySelector(link.hash) }))
+  .filter(chapter => chapter.section);
+if (chapters.length) {
+  let readingLine = 0;
+  let activeLink;
+  let frame = 0;
+
+  function updateChapter() {
+    frame = 0;
+    let current = chapters[0];
+    for (const chapter of chapters) {
+      if (chapter.section.getBoundingClientRect().top > readingLine) break;
+      current = chapter;
+    }
+    if (activeLink === current.link) return;
+    activeLink?.removeAttribute('aria-current');
+    activeLink = current.link;
+    activeLink.setAttribute('aria-current', 'location');
+    if (!wideScreen.matches) {
+      const item = activeLink.getBoundingClientRect();
+      const rail = caseNav.getBoundingClientRect();
+      if (item.right > rail.right) caseNav.scrollLeft += item.right - rail.right + 8;
+      else if (item.left < rail.left) caseNav.scrollLeft -= rail.left - item.left + 8;
+    }
   }
-  markSection(sectionLinks[0].hash.slice(1));
-  const sectionObserver = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
-    if (visible[0]) markSection(visible[0].target.id);
-  }, { rootMargin: '-12% 0px -60% 0px', threshold: 0 });
-  sectionLinks.forEach(link => {
-    const section = document.querySelector(link.hash);
-    if (section) sectionObserver.observe(section);
-    link.addEventListener('click', () => markSection(link.hash.slice(1)));
-  });
+  function scheduleChapter() {
+    if (!frame) frame = requestAnimationFrame(updateChapter);
+  }
+  function measureChapterLine() {
+    readingLine = (parseFloat(getComputedStyle(root).scrollPaddingTop) || 0) +
+      (parseFloat(getComputedStyle(chapters[0].section).scrollMarginTop) || 0) + 3;
+    scheduleChapter();
+  }
+  measureChapterLine();
+  window.addEventListener('scroll', scheduleChapter, { passive: true });
+  window.addEventListener('resize', measureChapterLine);
+  window.addEventListener('hashchange', scheduleChapter);
 }
 
 const art = document.querySelector('.hero-art');

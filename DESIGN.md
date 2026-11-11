@@ -16,7 +16,9 @@ Case studies pair the introduction with original product imagery, followed by a 
 
 The [Work reference (V05)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/work-desktop-light.png) informed a shorter index opening and preview surfaces drawn from each project's imagery. The [Mentra decision reference (V07)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/mentra-decisions-desktop-light.png) informed the reading notes beside product screens. On phones the notes stack below each figure. Readers can open the image at its original size, including when JavaScript is unavailable.
 
-Corners are sharp for page structure, 8px for controls, and 12px for image wells. The only larger radius belongs to the original phone imagery. Focus rings use the accent color with a contrasting outline. Layers: page 0, navigation 10, menu 20, image dialog 30.
+Page structure stays sharp, with 8px controls and 12px image wells. The floating toolbar, mobile menu, and viewer controls have softer corners and a tinted glass finish. The effect follows [Apple's guidance for Liquid Glass](https://developer.apple.com/design/human-interface-guidelines/materials): controls float above the content, while screenshots and reading surfaces stay solid. The web version uses backdrop blur and a lit edge, with solid surfaces when blur is unavailable or the browser reports reduced transparency, increased contrast, or forced colors.
+
+The site toolbar stays visible during scroll. The chapter rail and anchor offsets leave room for it, and the image viewer keeps its toolbar visible when an image scrolls inside the dialog. Focus rings use the accent color with a contrasting outline.
 
 The abstract connected-routes sculpture is illustrative artwork. It does not depict a shipped interface. Cync uses the original published app imagery. No reconstructed product UI, invented metrics, testimonials, or fabricated recent case-study process is included.
 

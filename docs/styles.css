@@ -227,3 +227,118 @@ main{max-width:1440px;margin:auto;padding:0 64px}.home-hero{overflow:clip;positi
  .evidence-note{padding:22px}.evidence-note p{font-size:13px}.case-references h2{font-size:32px}.case-references ul{display:block}.case-references li+li{margin-top:6px}
  .next-project{padding:28px 0 40px;margin-bottom:16px}.next-project strong{font-size:48px}.next-description{font-size:12px}.next-arrow{font-size:32px}
 }
+
+/* The glass layer belongs to navigation and viewer controls. */
+:root {
+  --nav-height:80px;
+  --nav-offset:8px;
+  --glass-base:#20241d;
+  --glass-tint:rgba(30,34,27,.82);
+  --glass-edge:rgba(224,234,216,.23);
+  --glass-sheen:rgba(255,255,255,.075);
+  --glass-rim:rgba(255,255,255,.17);
+  --glass-shadow:0 6px 22px rgba(0,0,0,.25);
+  scroll-padding-top:100px;
+}
+:root[data-theme=light] {
+  --glass-base:#f0f0e7;
+  --glass-tint:rgba(247,247,238,.82);
+  --glass-edge:rgba(73,85,65,.24);
+  --glass-sheen:rgba(255,255,255,.48);
+  --glass-rim:rgba(255,255,255,.89);
+  --glass-shadow:0 6px 22px rgba(36,46,27,.11);
+}
+.glass-surface {
+  border:1px solid var(--glass-edge);
+  background:var(--glass-base);
+  box-shadow:var(--glass-shadow), inset 0 1px var(--glass-rim);
+}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)) {
+  .glass-surface {
+    background:linear-gradient(165deg,var(--glass-sheen),transparent 58%),var(--glass-tint);
+    -webkit-backdrop-filter:blur(18px) saturate(1.3);
+    backdrop-filter:blur(18px) saturate(1.3);
+  }
+}
+.site-header {
+  position:sticky;
+  top:var(--nav-offset);
+  height:var(--nav-height);
+}
+.nav-glass {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  min-height:62px;
+  padding:0 10px 0 20px;
+  border-radius:22px;
+}
+.nav-glass .wordmark { flex:none; }
+.nav-glass .desktop-nav { gap:5px; }
+.nav-glass .desktop-nav a {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:44px;
+  border-radius:12px;
+  padding:8px 14px;
+}
+.nav-glass .desktop-nav a:last-child { margin-left:0; }
+.nav-glass .desktop-nav a::after { content:none; }
+.nav-glass .desktop-nav a:hover,
+.nav-glass .desktop-nav a[aria-current="page"],
+.nav-glass .theme-toggle:hover,
+.nav-glass .menu-toggle:hover,
+.nav-glass .menu-toggle[aria-expanded="true"] { background:var(--surface-2); }
+.nav-glass .desktop-nav a[aria-current="page"] { font-weight:700; }
+.nav-glass .nav-controls { flex:none; }
+.nav-glass .theme-toggle,
+.nav-glass .menu-toggle { border-radius:12px; }
+.work-section,.case-section,.case-references,.research-table tr { scroll-margin-top:12px; }
+.case-sidebar { top:100px; }
+.dialog-heading {
+  position:sticky;
+  top:0;
+  z-index:1;
+  border-radius:16px;
+  padding:6px 8px 6px 14px;
+}
+.dialog-heading .dialog-controls { margin-left:auto; }
+.dialog-heading .dialog-close { border-radius:10px; }
+
+@media (max-width:767px) {
+  :root { --nav-height:72px; --nav-offset:6px; scroll-padding-top:92px; }
+  .nav-glass { min-height:56px; gap:8px; padding:0 6px 0 12px; border-radius:20px; }
+  .nav-glass .nav-controls { gap:5px; }
+  .mobile-nav.glass-surface:not([hidden]) {
+    inset:calc(100% - 2px) 18px auto;
+    padding:7px 14px;
+    border-radius:18px;
+    border-color:var(--glass-edge);
+    background:var(--glass-base);
+  }
+  @supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)) {
+    .mobile-nav.glass-surface:not([hidden]) {
+      background:linear-gradient(165deg,var(--glass-sheen),transparent 58%),var(--glass-tint);
+    }
+  }
+  .mobile-nav a { font-size:16px; }
+  .mobile-nav a[aria-current="page"] { color:var(--accent); font-weight:700; }
+  .case-sidebar { top:calc(var(--nav-offset) + var(--nav-height) - 2px); }
+  .case-section,.case-references,.research-table tr { scroll-margin-top:64px; }
+  .dialog-heading { padding-left:10px; }
+}
+@media (prefers-reduced-transparency:reduce), (prefers-contrast:more), (forced-colors:active) {
+  .glass-surface,.mobile-nav.glass-surface:not([hidden]) {
+    background:var(--bg);
+    border-color:currentColor;
+    box-shadow:none;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}
+@media print {
+  .site-header,.case-sidebar,.dialog-heading { position:static; }
+  .glass-surface { background:transparent; box-shadow:none; backdrop-filter:none; }
+}

@@ -69,3 +69,11 @@ Opened the Work index and Mentra decision reference images from the Parth Design
 Reviewed the Work index at 1440px in both themes, the desktop Central Dispatch evidence layout, and the Work and Cync mobile layouts at 390px. At 320px and 768px, Home, Work, Central Dispatch, and Cync had no horizontal overflow or broken completed images.
 
 Verified that Enter opens the image viewer, Escape closes it and returns focus, and the original-size link points to the same source asset. A deliberate local image failure showed the retry action; restoring the source and retrying returned the viewer to its ready state. With JavaScript disabled, the Cync image link opened the original file directly. The build, link checks, and JavaScript syntax check passed.
+
+## Floating glass controls
+
+Reviewed the light homepage and open menu at 390px and the dark Work page at 1440px. At 320px, the toolbar and its controls fit without horizontal overflow. The Cync research jump placed the heading below both bars and marked Research findings as the current chapter.
+
+Escape closed the mobile menu and restored focus. The Cync image viewer opened by keyboard, retained its original-size link, and kept the toolbar in place while the image scrolled in a short viewport. Escape closed the dialog and returned focus to the image link. The no-script mobile navigation remained visible.
+
+Emulated reduced transparency and increased contrast both removed backdrop blur; reduced transparency also showed the solid page-color fill. The build, link checks, and JavaScript syntax check passed. Browser testing used desktop and mobile viewport emulation.
