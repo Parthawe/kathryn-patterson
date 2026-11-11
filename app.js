@@ -99,7 +99,7 @@ function loadViewer(button, retry = false) {
   status.textContent = 'Loading image…';
   status.hidden = false;
   dialog.querySelector('.image-dialog-caption').textContent = button.dataset.caption;
-  dialog.querySelector('.viewer-original').href = button.dataset.image;
+  dialog.querySelector('.viewer-original').href = button.href;
   image.onload = () => {
     if (request !== viewerRequest) return;
     dialog.dataset.state = 'ready';
@@ -113,11 +113,20 @@ function loadViewer(button, retry = false) {
     recovery.hidden = false;
   };
   if (!dialog.open) dialog.showModal();
-  const imageUrl = new URL(button.dataset.image, location.href);
+  const imageUrl = new URL(button.href);
   if (retry) imageUrl.searchParams.set('retry', Date.now());
   image.src = imageUrl.href;
 }
-document.querySelectorAll('.image-zoom').forEach(button => button.addEventListener('click', () => loadViewer(button)));
+if (typeof dialog?.showModal === 'function') {
+  document.querySelectorAll('.image-zoom').forEach(link => {
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      loadViewer(link);
+    });
+  });
+}
 dialog?.querySelector('.viewer-retry').addEventListener('click', () => { if (lastImageButton) loadViewer(lastImageButton, true); });
 dialog?.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
 dialog?.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });

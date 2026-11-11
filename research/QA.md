@@ -61,3 +61,11 @@ Desktop review at 1440px covered both project introductions and the Cync researc
 The image viewer opened a Cync screen in its ready state and restored focus when closed. Mobile contact closed the menu and focused the footer. With JavaScript disabled at 320px, fallback navigation and all three research findings remained visible without horizontal overflow. Script execution was restored afterward.
 
 The single design scan for this revision returned no findings. The final build, local-link checker, and syntax checks passed. The prior tab-specific checks above describe the earlier release; this revision replaces tabs with a static comparison table.
+
+## November 10 reference pass
+
+Opened the Work index and Mentra decision reference images from the Parth Design Taste skill. Applied the first to the shorter Work opening and project-specific preview surfaces. Applied the second to the notes beside original screenshots, with no new claims about design ownership or measured results.
+
+Reviewed the Work index at 1440px in both themes, the desktop Central Dispatch evidence layout, and the Work and Cync mobile layouts at 390px. At 320px and 768px, Home, Work, Central Dispatch, and Cync had no horizontal overflow or broken completed images.
+
+Verified that Enter opens the image viewer, Escape closes it and returns focus, and the original-size link points to the same source asset. A deliberate local image failure showed the retry action; restoring the source and retrying returned the viewer to its ready state. With JavaScript disabled, the Cync image link opened the original file directly. The build, link checks, and JavaScript syntax check passed.

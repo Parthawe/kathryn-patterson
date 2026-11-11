@@ -14,6 +14,8 @@ The default theme is warm ivory with dark green text and sage surfaces; the char
 
 Case studies pair the introduction with original product imagery, followed by a compact role and context summary. The reading column uses smaller editorial headings, concise paragraphs, and larger product figures. Cync research findings stay visible together in a comparison table, with labeled blocks on phones. Proposed responses and documented outcomes remain distinct.
 
+The [Work reference (V05)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/work-desktop-light.png) informed a shorter index opening and preview surfaces drawn from each project's imagery. The [Mentra decision reference (V07)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/mentra-decisions-desktop-light.png) informed the reading notes beside product screens. On phones the notes stack below each figure. Readers can open the image at its original size, including when JavaScript is unavailable.
+
 Corners are sharp for page structure, 8px for controls, and 12px for image wells. The only larger radius belongs to the original phone imagery. Focus rings use the accent color with a contrasting outline. Layers: page 0, navigation 10, menu 20, image dialog 30.
 
 The abstract connected-routes sculpture is illustrative artwork. It does not depict a shipped interface. Cync uses the original published app imagery. No reconstructed product UI, invented metrics, testimonials, or fabricated recent case-study process is included.

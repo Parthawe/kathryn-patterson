@@ -22,6 +22,8 @@ The [official mobile-search guide](https://www.centraldispatch.com/resources/sea
 
 Original product artwork belongs to Central Dispatch / Cox Automotive. Website image derivatives use format compression without reconstructing the interface or changing its content.
 
+The project preview shows the search screen and the listings panel from the published results figure. The preview crops out the guide's surrounding annotations; the case study retains the complete figure and credits the guide.
+
 ## Cync
 
 - [Original capstone website](https://projects.nmi.cool/2022/em/cync/) identifies the three-person team and Kathryn's UX Designer and Developer role.
