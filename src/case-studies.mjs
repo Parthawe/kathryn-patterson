@@ -1,4 +1,5 @@
-import { site } from './content.mjs';
+import { projects, site } from './content.mjs';
+import { projectMedia } from './project-media.mjs';
 
 const arrow = '<span aria-hidden="true">↗</span>';
 const external = (href, label) => `<a class="text-link" href="${href}" target="_blank" rel="noopener noreferrer">${label} ${arrow}<span class="sr-only"> (opens in a new tab)</span></a>`;
@@ -16,14 +17,15 @@ function artifact(root, { title, file, alt, caption, details }) {
   </div></div>`;
 }
 
-function caseHeader(root, { name, intro, summary, image, alt, credit, kind, facts, jump }) {
+function caseHeader(root, { project, intro, summary, credit, facts, jump }) {
   return `<header class="case-header">
     <a class="back-link" href="${root}work/">← All work</a>
     <div class="case-hero">
-      <div class="case-hero-copy"><h1>${name}</h1><p class="case-intro">${intro}</p><p class="case-standfirst">${summary}</p><a class="text-link" href="#${jump[0]}">${jump[1]} <span aria-hidden="true">↓</span></a></div>
-      <figure class="case-hero-figure"><div class="case-product ${kind}"><img src="${root}assets/images/${image}" alt="${alt}" width="${kind === 'dispatch-product' ? 418 : 1248}" height="${kind === 'dispatch-product' ? 889 : 2518}" fetchpriority="high" decoding="async"></div><figcaption>${credit}</figcaption></figure>
+      <div class="case-hero-copy"><h1>${project.name}</h1><p class="case-intro">${intro}</p></div>
+      <div class="case-context"><p class="case-standfirst">${summary}</p><a class="text-link" href="#${jump[0]}">${jump[1]} <span aria-hidden="true">↓</span></a></div>
     </div>
     <dl class="case-facts">${facts.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>
+    <figure class="case-hero-figure">${projectMedia(root, project, true)}<figcaption>${credit}</figcaption></figure>
   </header>`;
 }
 
@@ -42,13 +44,10 @@ function nextProject(root, slug, name, description) {
 export function dispatch(root) {
   return `<article class="case-study">
   ${caseHeader(root, {
-    name: 'Central Dispatch',
-    intro: 'Find the next load, from a phone.',
-    summary: 'Mobile search for carriers in automotive logistics. I collaborated with UX Research, Product, and Software Engineering on the search launch.',
-    image: 'cd-search-screen.webp',
-    alt: 'Central Dispatch mobile search with saved searches, pickup and delivery locations, filters, and a Search Loads button.',
-    credit: 'Published interface · Central Dispatch carrier mobile app guide',
-    kind: 'dispatch-product',
+    project: projects[0],
+    intro: 'Finding and comparing vehicle loads on a phone',
+    summary: 'I worked with UX Research, Product, and Software Engineering to launch search in the Central Dispatch carrier app.',
+    credit: 'Search and listings from the Central Dispatch carrier mobile app guide.',
     facts: [['Focus','Carrier mobile search'],['Team','Shipment Solutions'],['Company','Cox Automotive'],['Project scope','Public launch overview']],
     jump: ['experience','Explore the search flow']
   })}
@@ -92,13 +91,10 @@ export function dispatch(root) {
 export function cync(root) {
   return `<article class="case-study">
   ${caseHeader(root, {
-    name: 'Cync',
-    intro: 'Local places and events, in one app.',
+    project: projects[1],
+    intro: 'Helping Gordon County residents find local places and events',
     summary: 'A graduate capstone connecting Gordon County residents with their community. My role combined UX design and development in a three-person team.',
-    image: 'cync-phone.webp',
-    alt: 'The original Cync app shown in its published white phone mockup.',
-    credit: 'Original app presentation · University of Georgia capstone archive',
-    kind: 'cync-product',
+    credit: 'Original app presentation from the University of Georgia capstone archive.',
     facts: [['My role','UX Designer & Developer'],['Team','Kathryn, Natasha & Belle'],['Research','10-person study'],['Context','University of Georgia, 2022']],
     jump: ['findings','Explore the research findings']
   })}

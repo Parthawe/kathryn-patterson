@@ -39,14 +39,6 @@ document.addEventListener('click', e => { if (!e.target.closest('.site-header') 
 const wideScreen = matchMedia('(min-width: 768px)');
 wideScreen.addEventListener('change', e => { if (e.matches) closeMenu(); });
 
-const motion = matchMedia('(prefers-reduced-motion: reduce)');
-if ('IntersectionObserver' in window && !motion.matches) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => { el.classList.add('will-reveal'); observer.observe(el); });
-}
-
 const caseNav = document.querySelector('.case-sidebar');
 const chapters = [...(caseNav?.querySelectorAll('a') ?? [])]
   .map(link => ({ link, section: document.querySelector(link.hash) }))
@@ -86,17 +78,6 @@ if (chapters.length) {
   window.addEventListener('scroll', scheduleChapter, { passive: true });
   window.addEventListener('resize', measureChapterLine);
   window.addEventListener('hashchange', scheduleChapter);
-}
-
-const art = document.querySelector('.hero-art');
-if (art && matchMedia('(pointer:fine)').matches) {
-  art.addEventListener('pointermove', e => {
-    if (motion.matches) return;
-    const rect = art.getBoundingClientRect();
-    art.style.setProperty('--rx', `${(e.clientY - rect.top - rect.height / 2) / 90}deg`);
-    art.style.setProperty('--ry', `${(e.clientX - rect.left - rect.width / 2) / -90}deg`);
-  });
-  art.addEventListener('pointerleave', () => { art.style.setProperty('--rx', '0deg'); art.style.setProperty('--ry', '0deg'); });
 }
 
 const dialog = document.querySelector('.image-dialog');
