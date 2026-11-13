@@ -70,4 +70,4 @@ Edit prompt:
 
 ## Fonts
 
-Cormorant Garamond and Manrope are self-hosted from their Fontsource packages. Their licenses are included in `assets/fonts/`. Builds use those checked-in files; visitors do not make third-party font requests.
+The site uses fonts installed on the visitor’s device and makes no third-party font requests.

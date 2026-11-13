@@ -1,12 +1,21 @@
 const root = document.documentElement;
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+let manualTheme = false;
+try { manualTheme = ['dark', 'light'].includes(localStorage.getItem('kp-theme')); } catch {}
 const themeButton = document.querySelector('.theme-toggle');
 function updateThemeControl() {
   const light = root.dataset.theme === 'light';
   themeButton?.setAttribute('aria-label', `Switch to ${light ? 'dark' : 'light'} mode`);
-  document.querySelector('meta[name=theme-color]').content = light ? '#f3f0e8' : '#151713';
+  document.querySelector('meta[name=theme-color]').content = light ? '#f5f5f7' : '#151517';
 }
 updateThemeControl();
+systemTheme.addEventListener('change', ({ matches }) => {
+  if (manualTheme) return;
+  root.dataset.theme = matches ? 'dark' : 'light';
+  updateThemeControl();
+});
 themeButton?.addEventListener('click', () => {
+  manualTheme = true;
   root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
   try { localStorage.setItem('kp-theme', root.dataset.theme); } catch {}
   updateThemeControl();

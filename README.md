@@ -7,7 +7,7 @@ A six-page product-design portfolio inspired by the dark, editorial presentation
 
 ## Develop
 
-Requires Node.js 18+ and Python 3. There are no production JavaScript dependencies. Font packages are development dependencies; checked-in font files allow normal builds without installation.
+Requires Node.js 18+ and Python 3. The site uses system fonts and has no package dependencies.
 
 ```sh
 npm run dev
@@ -30,7 +30,7 @@ The build writes the deployable site to `docs/` and versions CSS and JavaScript 
 - `/about/`: professional introduction and portrait.
 - `/site-info/`: sources, image credits, privacy, and accessibility information.
 
-The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. Light mode is the default; the labeled theme control preserves each visitor's choice. Research findings remain visible in a comparison table that reflows on phones. Mobile navigation and all case-study text remain available without JavaScript.
+The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. The theme follows the device until a visitor chooses light or dark mode. Research findings remain visible in a comparison table that reflows on phones. Mobile navigation and all case-study text remain available without JavaScript.
 
 ## Edit
 
@@ -40,7 +40,6 @@ The website also includes a custom 404 page, sitemap, social metadata, light and
 - `styles.css`: layout, themes, responsive behavior, and visual states.
 - `app.js`: menu, theme preference, case-study section tracking, image viewer, and modest motion.
 - `assets/images/`: optimized published imagery.
-- `assets/fonts/`: self-hosted fonts with their licenses.
 - `research/SOURCES.md`: public source provenance and content limits.
 - `HANDOVER.md`: editing, publishing, account transfer, and domain guidance.
 
@@ -65,6 +64,6 @@ The site uses public professional information and real published product imagery
 
 There is no résumé download because no current résumé was supplied. Contact uses Kathryn's LinkedIn profile. Add a public email or résumé only when supplied for that purpose. Do not add internal research or client data to a public repository.
 
-The portfolio has no forms, advertising pixels, analytics scripts, accounts, or third-party embeds. Theme preference is stored locally in the visitor's browser. Images and font files load from the same site.
+The portfolio has no forms, advertising pixels, analytics scripts, accounts, or third-party embeds. Theme preference is stored locally in the visitor's browser. Images load from the same site.
 
-Third-party images and product materials remain the property of their respective owners. Font licenses are included alongside the font files. The abstract hero sculpture was created using the built-in image-generation tool; the prompt and its role are recorded in `research/SOURCES.md`.
+Third-party images and product materials remain the property of their respective owners. The abstract hero sculpture was created using the built-in image-generation tool; the prompt and its role are recorded in `research/SOURCES.md`.

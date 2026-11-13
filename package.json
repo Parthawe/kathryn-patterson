@@ -9,9 +9,5 @@
     "dev": "node scripts/build.mjs && python3 -m http.server 5178 --bind 127.0.0.1 --directory docs",
     "check": "node scripts/check.mjs",
     "prepare:pages": "npm run build && npm run check"
-  },
-  "devDependencies": {
-    "@fontsource-variable/cormorant-garamond": "^5.3.0",
-    "@fontsource-variable/manrope": "^5.3.0"
   }
 }
