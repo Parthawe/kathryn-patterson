@@ -3,9 +3,7 @@ const themeButton = document.querySelector('.theme-toggle');
 function updateThemeControl() {
   const light = root.dataset.theme === 'light';
   themeButton?.setAttribute('aria-label', `Switch to ${light ? 'dark' : 'light'} mode`);
-  const label = themeButton?.querySelector('.theme-label');
-  if (label) label.textContent = light ? 'Dark mode' : 'Light mode';
-  document.querySelector('meta[name=theme-color]').content = light ? '#f7f6f0' : '#11130f';
+  document.querySelector('meta[name=theme-color]').content = light ? '#f3f0e8' : '#151713';
 }
 updateThemeControl();
 themeButton?.addEventListener('click', () => {

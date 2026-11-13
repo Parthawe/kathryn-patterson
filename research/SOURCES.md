@@ -52,7 +52,11 @@ The Central Dispatch guide was checked again for saved searches, changing filter
 
 ## Generated artwork
 
-The connected-routes image is abstract portfolio artwork. It does not depict a product, a research artifact, or a documented outcome. The site-info page identifies it as AI-generated. Generation used the built-in image tool. Final website asset: `assets/images/connected-routes.webp`. `social-card.webp` uses the same artwork for link previews.
+The homepage roadway sculpture was created with the built-in ImageGen tool and compressed to WebP as `assets/images/roadway-study.webp`. It illustrates the subject of the portfolio.
+
+> Use case: stylized-concept. Asset type: transparent homepage hero artwork for a senior product designer's automotive logistics portfolio. Create a photorealistic editorial studio render of a single physical sculpture: two sweeping, precision-machined metal roadway ramps crossing at different elevations over a dark olive-gray architectural relief slab. One tiny unbranded ivory model vehicle on the upper roadway for scale, no other objects. Brushed champagne aluminum top surfaces, blackened edges, small parallel engraved lane markings and sparse topographic grooves in the base. A tightly composed wide isometric three-quarter view, viewed slightly from above, the composition reads clearly as a miniature transport interchange and an industrial design object. Sculpture spans 88 percent of a 4:3 landscape frame, fully visible with generous transparent space around its silhouette. Soft directional studio lighting, tactile satin metal and real machined detail, strong edge highlights, deep controlled shadows within the object. Sophisticated architecture model photographed for a design monograph. True alpha transparency around the whole object, no floor, no drop shadow outside the object, no background, no typography, no watermark, no gradients in the transparent area, no neon, no glass, no floating ornaments.
+
+The earlier connected-routes image is abstract portfolio artwork. Generation used the built-in image tool. The archived site asset is `assets/images/connected-routes.webp`. `social-card.webp` uses the same artwork for link previews.
 
 Initial prompt:
 

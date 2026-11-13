@@ -7,10 +7,12 @@ const external = (href, text, cls = 'text-link') => `<a class="${cls}" href="${h
 
 function nav(root, current) {
   return `<a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="nav-glass glass-surface"><a class="wordmark" href="${root}" aria-label="Kathryn Patterson, home">kathryn<span>.</span></a>
-  <nav class="desktop-nav" aria-label="Main navigation"><a href="${root}work/" ${current === 'work' ? 'aria-current="page"' : ''}>Work</a><a href="${root}about/" ${current === 'about' ? 'aria-current="page"' : ''}>About</a><a href="#contact">Get in touch ${arrow}</a></nav>
-  <div class="nav-controls"><button class="theme-toggle" type="button" aria-label="Switch to dark mode"><svg class="theme-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path class="moon-icon" d="M20.5 14.2A8.8 8.8 0 0 1 9.8 3.5a8.8 8.8 0 1 0 10.7 10.7Z"/><g class="sun-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></g></svg><span class="theme-label">Dark mode</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button></div>
-  <noscript><style>.nav-controls{display:none}.nav-glass>noscript{display:contents}</style><nav class="no-script-nav" aria-label="Mobile navigation"><a href="${root}work/">Work</a><a href="${root}about/">About</a><a href="#contact">Contact</a></nav></noscript></div>
+  <header class="site-header">
+  <div class="nav-glass glass-surface"><a class="wordmark" href="${root}" aria-label="Kathryn Patterson, home">Kathryn Patterson</a>
+  <nav class="desktop-nav" aria-label="Main navigation"><a href="${root}work/" ${current === 'work' ? 'aria-current="page"' : ''}>Work</a><a href="${root}about/" ${current === 'about' ? 'aria-current="page"' : ''}>About</a></nav></div>
+  <div class="nav-controls"><button class="theme-toggle glass-surface" type="button" aria-label="Switch to light mode"><svg class="theme-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path class="moon-icon" d="M20.5 14.2A8.8 8.8 0 0 1 9.8 3.5a8.8 8.8 0 1 0 10.7 10.7Z"/><g class="sun-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></g></svg></button><button class="menu-toggle glass-surface" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button></div>
+  <a class="nav-contact glass-surface" href="#contact">Get in touch ${arrow}</a>
+  <noscript><style>.nav-controls{display:none}.site-header>noscript{display:contents}</style><nav class="no-script-nav" aria-label="Mobile navigation"><a href="${root}work/">Work</a><a href="${root}about/">About</a><a href="#contact">Contact</a></nav></noscript>
   <nav id="mobile-nav" class="mobile-nav glass-surface" aria-label="Mobile navigation" hidden><a href="${root}work/" ${current === 'work' ? 'aria-current="page"' : ''}>Work</a><a href="${root}about/" ${current === 'about' ? 'aria-current="page"' : ''}>About</a><a href="#contact">Get in touch ${arrow}</a></nav></header>`;
 }
 
@@ -22,14 +24,12 @@ function footer(root) {
 function card(project, root, heading = 'h3') {
   return `<article class="project-card ${project.cover}">
     <a class="project-card-link" href="${root}work/${project.slug}/" aria-labelledby="title-${project.slug}" aria-describedby="description-${project.slug} evidence-${project.slug}">
+      ${projectMedia(root, project)}
       <div class="project-description">
         <p class="project-category">${project.note}</p>
         <${heading} class="project-title" id="title-${project.slug}">${project.name}</${heading}>
         <p id="description-${project.slug}">${project.description}</p>
-      </div>
-      ${projectMedia(root, project)}
-      <div class="project-details">
-        <dl id="evidence-${project.slug}" class="project-summary"><div><dt>Contribution</dt><dd>${project.contribution}</dd></div><div><dt>Evidence</dt><dd>${project.evidence}</dd></div></dl>
+        <p id="evidence-${project.slug}" class="project-evidence">${project.contribution} ${project.evidence}</p>
         <span class="card-open">Read the case study <span aria-hidden="true">→</span></span>
       </div>
     </a>
@@ -40,19 +40,24 @@ function layout({ title, description, route = '', current = '', content, image =
   const depth = route.split('/').filter(Boolean).length;
   const root = depth ? '../'.repeat(depth) : './';
   const canonical = site.base + route;
-  return `<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark light"><title>${title}</title><meta name="description" content="${description}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${site.base}assets/images/${image}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="${root}assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="${root}styles.css?v=${versions.css || '1'}"><script>try{const t=localStorage.getItem('kp-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;document.querySelector('meta[name=theme-color]').content=document.documentElement.dataset.theme==='light'?'#f7f6f0':'#11130f'}catch{}</script><script type="module" src="${root}app.js?v=${versions.js || '1'}"></script></head><body>${nav(root, current)}<main id="main">${content(root)}</main>${footer(root)}<dialog class="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-heading glass-surface"><h2 id="image-dialog-title">Project image</h2><div class="dialog-controls"><a class="viewer-original text-link" target="_blank" rel="noopener noreferrer">Original size ${arrow}<span class="sr-only"> (opens in a new tab)</span></a><button type="button" class="dialog-close" autofocus>Close</button></div></div><p class="viewer-status" role="status" aria-live="polite" hidden></p><div class="viewer-recovery" hidden><button class="viewer-retry button" type="button">Try again</button></div><div class="dialog-image-wrap"></div><p class="image-dialog-caption"></p></dialog></body></html>`;
+  return `<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark light"><title>${title}</title><meta name="description" content="${description}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${site.base}assets/images/${image}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#151713"><link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="${root}assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="${root}styles.css?v=${versions.css || '1'}"><script>try{const t=localStorage.getItem('kp-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;document.querySelector('meta[name=theme-color]').content=document.documentElement.dataset.theme==='light'?'#f3f0e8':'#151713'}catch{}</script><script type="module" src="${root}app.js?v=${versions.js || '1'}"></script></head><body>${nav(root, current)}<main id="main">${content(root)}</main>${footer(root)}<dialog class="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-heading glass-surface"><h2 id="image-dialog-title">Project image</h2><div class="dialog-controls"><a class="viewer-original text-link" target="_blank" rel="noopener noreferrer">Original size ${arrow}<span class="sr-only"> (opens in a new tab)</span></a><button type="button" class="dialog-close" autofocus>Close</button></div></div><p class="viewer-status" role="status" aria-live="polite" hidden></p><div class="viewer-recovery" hidden><button class="viewer-retry button" type="button">Try again</button></div><div class="dialog-image-wrap"></div><p class="image-dialog-caption"></p></dialog></body></html>`;
 }
 
 function home(root) {
   return `<section class="portfolio-intro" aria-labelledby="portfolio-title">
-    <h1 id="portfolio-title">Kathryn <span>Patterson</span></h1>
-    <div class="portfolio-role"><p><strong>Senior product designer</strong><br>I design carrier workflows at CAI Logistics, part of Cox Automotive.</p>
-      <a class="text-link" href="#selected-work">See selected work <span aria-hidden="true">↓</span></a>
+    <div class="portfolio-role">
+      <h1 id="portfolio-title">Designing <em>for the road.</em></h1>
+      <p>I'm Kathryn Patterson, a senior product designer at CAI Logistics, part of Cox Automotive. I design tools for vehicle carriers.</p>
+      <a class="button button-primary" href="#selected-work">Explore my work <span aria-hidden="true">↓</span></a>
     </div>
-    <img class="portfolio-portrait" src="${root}assets/images/kathryn-current.webp" alt="Kathryn Patterson smiling outdoors." width="800" height="800" fetchpriority="high" decoding="async">
+    <div class="portfolio-art"><img src="${root}assets/images/roadway-study.webp" alt="" width="1448" height="1086" fetchpriority="high" decoding="async"></div>
   </section>
   <section id="selected-work" class="work-section section-space"><h2 class="section-title">Selected work</h2><div class="projects-grid">${projects.map(p=>card(p,root)).join('')}</div></section>
-  <div class="home-about"><a class="text-link" href="${root}about/">More about Kathryn <span aria-hidden="true">→</span></a></div>`;
+  <section class="home-about">
+    <img src="${root}assets/images/kathryn-current.webp" alt="Kathryn Patterson smiling outdoors." width="800" height="800" loading="lazy" decoding="async">
+    <div><h2>About Kathryn</h2><p>I work with research, product, and engineering teams on carrier workflows. My earlier work includes community research and development for an iOS capstone.</p>
+    <a class="text-link" href="${root}about/">More about me <span aria-hidden="true">→</span></a></div>
+  </section>`;
 }
 
 function work(root) {
@@ -72,7 +77,7 @@ function about(root) {
 }
 
 function info() {
-  return `<header class="page-heading"><h1>Site information.</h1><p>A few details about this portfolio.</p></header><div class="info-body"><section><h2>Content and images</h2><p>Professional information is drawn from Kathryn's public LinkedIn profile. Central Dispatch imagery comes from its public product guide. Cync material comes from the University of Georgia capstone archive. Project pages link to those sources.</p><p>The link preview uses AI-generated abstract artwork.</p></section><section><h2>Privacy</h2><p>This site has no contact form, advertising pixels, or analytics scripts. Your theme choice is stored in your browser. Visiting external links is subject to those services' policies. Hosting is provided by GitHub Pages.</p></section><section><h2>Accessibility</h2><p>The site includes keyboard navigation, visible focus states, image descriptions, reduced-motion support, and light and dark themes. Images can be enlarged with a keyboard-accessible viewer.</p><p>Contact Kathryn through LinkedIn if you need another way to access the material.</p></section></div>`;
+  return `<header class="page-heading"><h1>Site information</h1></header><div class="info-body"><section><h2>Content and images</h2><p>Professional information is drawn from Kathryn's public LinkedIn profile. Central Dispatch imagery comes from its public product guide. Cync material comes from the University of Georgia capstone archive. Project pages link to those sources.</p><p>The homepage sculpture and the link preview use AI-generated artwork.</p></section><section><h2>Privacy</h2><p>This site has no contact form, advertising pixels, or analytics scripts. Your theme choice is stored in your browser. Visiting external links is subject to those services' policies. Hosting is provided by GitHub Pages.</p></section><section><h2>Accessibility</h2><p>The site includes keyboard navigation, visible focus states, image descriptions, reduced-motion support, and light and dark themes. Images can be enlarged with a keyboard-accessible viewer.</p><p>Contact Kathryn through LinkedIn if you need another way to access the material.</p></section></div>`;
 }
 
 export const pages = [
