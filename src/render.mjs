@@ -1,6 +1,7 @@
 import { site, projects } from './content.mjs';
 import { dispatch, cync } from './case-studies.mjs';
 import { projectMedia } from './project-media.mjs';
+import { dispatchWalkthrough } from './dispatch-walkthrough.mjs';
 
 const arrow = '<span aria-hidden="true">↗</span>';
 const external = (href, text, cls = 'text-link') => `<a class="${cls}" href="${href}" target="_blank" rel="noopener noreferrer">${text} ${arrow}<span class="sr-only"> (opens in a new tab)</span></a>`;
@@ -52,7 +53,11 @@ function home(root) {
     </div>
     <div class="portfolio-art"><img src="${root}assets/images/roadway-study.webp" alt="" width="1448" height="1086" fetchpriority="high" decoding="async"></div>
   </section>
-  <section id="selected-work" class="work-section section-space"><h2 class="section-title">Selected work</h2><div class="projects-grid">${projects.map(p=>card(p,root)).join('')}</div></section>
+  <section id="selected-work" class="work-section section-space">
+    <h2 class="section-title">Selected work</h2>
+    ${dispatchWalkthrough(root)}
+    <div class="secondary-project">${card(projects[1],root)}</div>
+  </section>
   <section class="home-about">
     <img src="${root}assets/images/kathryn-current.webp" alt="Kathryn Patterson smiling outdoors." width="800" height="800" loading="lazy" decoding="async">
     <div><h2>About Kathryn</h2><p>I work with research, product, and engineering teams on carrier workflows. My earlier work includes community research and development for an iOS capstone.</p>
