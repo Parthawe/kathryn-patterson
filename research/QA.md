@@ -77,3 +77,15 @@ Reviewed the light homepage and open menu at 390px and the dark Work page at 144
 Escape closed the mobile menu and restored focus. The Cync image viewer opened by keyboard, retained its original-size link, and kept the toolbar in place while the image scrolled in a short viewport. Escape closed the dialog and returned focus to the image link. The no-script mobile navigation remained visible.
 
 Emulated reduced transparency and increased contrast both removed backdrop blur; reduced transparency also showed the solid page-color fill. The build, link checks, and JavaScript syntax check passed. Browser testing used desktop and mobile viewport emulation.
+
+## November 15 Central Dispatch draft
+
+Compared the live lead case study with the launch announcement and public carrier app guide. The local draft makes My contribution the first chapter and links to it from the opening summary. The launch announcement supports the description of team collaboration. An individual design decision still needs Kathryn’s confirmation and an example she can share.
+
+The six-page build and link checker passed. WebKit and Chromium checks at 1280px, 390px, and 320px confirmed that the homepage opens the case study, the keyboard jump marks My contribution as the current chapter, and the heading clears the sticky navigation. The search flow and image viewer stayed reachable. The jump also worked with JavaScript disabled. The draft is local and the live comparison used the November 13 release.
+
+## November 16 portfolio revision
+
+Chromium and WebKit checks at 1440px, 390px, and 320px covered all six routes in both site themes across the test matrix. The Central Dispatch link and Quick Search crop appear in the opening viewport. All three walkthrough choices worked by keyboard and pointer, and the full-image viewer returned focus on close. With JavaScript disabled, the Filters image opened directly. Cync’s finding and response labels appeared as headings at desktop and phone widths, and its tab bar opened the original screen.
+
+The six-page build and link checker passed. The homepage, Central Dispatch, and Cync each reference a separate 1200 × 630 JPEG share image, verified against the built files.

@@ -30,7 +30,7 @@ The build writes the deployable site to `docs/` and versions CSS and JavaScript 
 - `/about/`: professional introduction and portrait.
 - `/site-info/`: sources, image credits, privacy, and accessibility information.
 
-The website also includes a custom 404 page, sitemap, social metadata, light and dark themes, reduced-motion support, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. The theme follows the device until a visitor chooses light or dark mode. Research findings remain visible in a comparison table that reflows on phones. Mobile navigation and all case-study text remain available without JavaScript.
+The website also includes a custom 404 page, sitemap, share previews for the homepage and both projects, light and dark themes, reduced-motion support, active case-study section links, and an image viewer with loading, retry, and focus-restoration states. The theme follows the device until a visitor chooses light or dark mode. Cync uses headings for its research findings and proposed responses. Mobile navigation, the walkthrough, and all case-study text remain available without JavaScript.
 
 ## Edit
 

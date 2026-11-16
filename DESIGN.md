@@ -2,11 +2,11 @@
 
 The user requested a new portfolio inspired by designwhich.works, with the GitHub repository and Pages handoff used for Joel and Nishabh.
 
-The opening pairs a short introduction to Kathryn's work in automotive logistics with a machined roadway sculpture. The work index puts the original product screens above each project summary. Kathryn's portrait appears in the About section and on the About page.
+The opening introduces Kathryn’s work in automotive logistics and links directly to Central Dispatch. A compact roadway sculpture supports the introduction. A crop of the published Quick Search screen appears next, and the work index shows a preview of each project. Kathryn’s portrait appears in the About section and on the About page.
 
 The visual system follows [Apple’s Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) as a website. It uses the operating system’s font, including San Francisco on supported Apple devices, and a light or dark palette that follows the device until the visitor chooses a theme. Blue identifies primary actions and links. The roadway sculpture sits on a solid, softly lit stage. Product screenshots retain their original colors.
 
-Case studies put the task, contribution, and project context above a wide image. The reading column uses smaller system type headings and pairs product figures with notes. Cync research findings stay visible together in a comparison table, with labeled blocks on phones. The table identifies proposed responses.
+Central Dispatch leads with Kathryn’s documented launch contribution and places the published workflow in an interactive walkthrough. Cync leads with the navigation finding and a crop of the original tab bar. Each finding has a heading and a separately labeled proposed response at every width.
 
 The [Work reference (V05)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/work-desktop-light.png) informed a shorter index opening and preview surfaces drawn from each project's imagery. The [Mentra decision reference (V07)](https://github.com/Parthawe/parth-design-taste/blob/main/skills/parth-design-taste/references/images/mentra-decisions-desktop-light.png) informed the reading notes beside product screens. On phones the notes stack below each figure. Readers can open the image at its original size, including when JavaScript is unavailable.
 
@@ -14,6 +14,6 @@ The floating toolbar, mobile menu, and viewer controls follow [Apple’s materia
 
 The site toolbar stays visible during scroll. The chapter rail and anchor offsets leave room for it, and the image viewer keeps its toolbar visible when an image scrolls inside the dialog. Focus rings use the accent color with a contrasting outline.
 
-The homepage sculpture and social preview use AI-generated artwork. Project covers and case studies use published product imagery.
+The homepage sculpture and its share preview use AI-generated artwork. Each case study has its own share preview using published product imagery.
 
 Public content sources and copy limits are documented in research/SOURCES.md. Private planning documents stay untracked and out of docs/.

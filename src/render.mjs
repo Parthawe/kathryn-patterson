@@ -1,7 +1,6 @@
 import { site, projects } from './content.mjs';
 import { dispatch, cync } from './case-studies.mjs';
 import { projectMedia } from './project-media.mjs';
-import { dispatchWalkthrough } from './dispatch-walkthrough.mjs';
 
 const arrow = '<span aria-hidden="true">↗</span>';
 const external = (href, text, cls = 'text-link') => `<a class="${cls}" href="${href}" target="_blank" rel="noopener noreferrer">${text} ${arrow}<span class="sr-only"> (opens in a new tab)</span></a>`;
@@ -37,26 +36,45 @@ function card(project, root, heading = 'h3') {
   </article>`;
 }
 
-function layout({ title, description, route = '', current = '', content, image = 'social-card.webp', versions = {} }) {
+const defaultSocial = {
+  file: 'share-kathryn.jpg',
+  alt: 'Kathryn Patterson, Senior Product Designer. Product design for vehicle carriers.'
+};
+
+function layout({ title, description, route = '', current = '', content, social = defaultSocial, versions = {} }) {
   const depth = route.split('/').filter(Boolean).length;
   const root = depth ? '../'.repeat(depth) : './';
   const canonical = site.base + route;
-  return `<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${title}</title><meta name="description" content="${description}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${site.base}assets/images/${image}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f5f5f7"><link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${root}styles.css?v=${versions.css || '1'}"><script>try{const t=localStorage.getItem('kp-theme');const dark=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.dataset.theme=dark?'dark':'light';document.querySelector('meta[name=theme-color]').content=dark?'#151517':'#f5f5f7'}catch{}</script><script type="module" src="${root}app.js?v=${versions.js || '1'}"></script></head><body>${nav(root, current)}<main id="main">${content(root)}</main>${footer(root)}<dialog class="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-heading glass-surface"><h2 id="image-dialog-title">Project image</h2><div class="dialog-controls"><a class="viewer-original text-link" target="_blank" rel="noopener noreferrer">Original size ${arrow}<span class="sr-only"> (opens in a new tab)</span></a><button type="button" class="dialog-close" autofocus>Close</button></div></div><p class="viewer-status" role="status" aria-live="polite" hidden></p><div class="viewer-recovery" hidden><button class="viewer-retry button" type="button">Try again</button></div><div class="dialog-image-wrap"></div><p class="image-dialog-caption"></p></dialog></body></html>`;
+  return `<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${title}</title><meta name="description" content="${description}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${site.base}assets/images/${social.file}"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${social.alt}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f5f5f7"><link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${root}styles.css?v=${versions.css || '1'}"><script>try{const t=localStorage.getItem('kp-theme');const dark=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.dataset.theme=dark?'dark':'light';document.querySelector('meta[name=theme-color]').content=dark?'#151517':'#f5f5f7'}catch{}</script><script type="module" src="${root}app.js?v=${versions.js || '1'}"></script></head><body>${nav(root, current)}<main id="main">${content(root)}</main>${footer(root)}<dialog class="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-heading glass-surface"><h2 id="image-dialog-title">Project image</h2><div class="dialog-controls"><a class="viewer-original text-link" target="_blank" rel="noopener noreferrer">Original size ${arrow}<span class="sr-only"> (opens in a new tab)</span></a><button type="button" class="dialog-close" autofocus>Close</button></div></div><p class="viewer-status" role="status" aria-live="polite" hidden></p><div class="viewer-recovery" hidden><button class="viewer-retry button" type="button">Try again</button></div><div class="dialog-image-wrap"></div><p class="image-dialog-caption"></p></dialog></body></html>`;
 }
 
 function home(root) {
+  const [lead, supporting] = projects;
+  const leadUrl = `${root}work/${lead.slug}/`;
   return `<section class="portfolio-intro" aria-labelledby="portfolio-title">
     <div class="portfolio-role">
-      <h1 id="portfolio-title">Designing <span>for the road.</span></h1>
-      <p>I’m Kathryn Patterson, a senior product designer building tools for vehicle carriers at CAI Logistics, part of Cox Automotive.</p>
-      <a class="button button-primary" href="#selected-work">Explore my work <span aria-hidden="true">↓</span></a>
+      <h1 id="portfolio-title">Designing tools for vehicle carriers.</h1>
+      <p>I’m Kathryn Patterson, a senior product designer at CAI Logistics, part of Cox Automotive.</p>
+      <a class="button button-primary" href="${leadUrl}">View Central Dispatch <span aria-hidden="true">→</span></a>
     </div>
     <div class="portfolio-art"><img src="${root}assets/images/roadway-study.webp" alt="" width="1448" height="1086" fetchpriority="high" decoding="async"></div>
   </section>
   <section id="selected-work" class="work-section section-space">
     <h2 class="section-title">Selected work</h2>
-    ${dispatchWalkthrough(root)}
-    <div class="secondary-project">${card(projects[1],root)}</div>
+    <article class="featured-project" aria-labelledby="lead-project-title">
+      <div class="featured-project-intro">
+        <h3 id="lead-project-title">Central Dispatch</h3>
+        <p>I helped launch mobile load search so vehicle carriers could find and compare loads on their phones.</p>
+        <a class="text-link" href="${leadUrl}">Read the launch overview <span aria-hidden="true">→</span></a>
+      </div>
+      <figure class="lead-preview">
+        <div class="lead-preview-stage"><div class="evidence-crop evidence-preview">
+          <img src="${root}assets/images/${lead.image}" alt="Central Dispatch Quick Search with a saved search and pickup location field." width="418" height="889" decoding="async">
+        </div></div>
+        <figcaption>Quick Search in the carrier mobile app</figcaption>
+      </figure>
+    </article>
+    <div class="secondary-project">${card(supporting,root)}</div>
   </section>
   <section class="home-about">
     <img src="${root}assets/images/kathryn-current.webp" alt="Kathryn Patterson smiling outdoors." width="800" height="800" loading="lazy" decoding="async">
@@ -82,14 +100,14 @@ function about(root) {
 }
 
 function info() {
-  return `<header class="page-heading"><h1>Site information</h1></header><div class="info-body"><section><h2>Content and images</h2><p>Professional information is drawn from Kathryn's public LinkedIn profile. Central Dispatch imagery comes from its public product guide. Cync material comes from the University of Georgia capstone archive. Project pages link to those sources.</p><p>The homepage sculpture and the link preview use AI-generated artwork.</p></section><section><h2>Privacy</h2><p>This site has no contact form, advertising pixels, or analytics scripts. Your theme choice is stored in your browser. Visiting external links is subject to those services' policies. Hosting is provided by GitHub Pages.</p></section><section><h2>Accessibility</h2><p>The site includes keyboard navigation, visible focus states, image descriptions, reduced-motion support, and light and dark themes. Images can be enlarged with a keyboard-accessible viewer.</p><p>Contact Kathryn through LinkedIn if you need another way to access the material.</p></section></div>`;
+  return `<header class="page-heading"><h1>Site information</h1></header><div class="info-body"><section><h2>Content and images</h2><p>Professional information is drawn from Kathryn's public LinkedIn profile. Central Dispatch imagery comes from its public product guide. Cync material comes from the University of Georgia capstone archive. Project pages link to those sources.</p><p>The homepage and its link preview use an AI-generated roadway sculpture. Project link previews use published screenshots.</p></section><section><h2>Privacy</h2><p>This site has no contact form, advertising pixels, or analytics scripts. Your theme choice is stored in your browser. Visiting external links is subject to those services' policies. Hosting is provided by GitHub Pages.</p></section><section><h2>Accessibility</h2><p>The site includes keyboard navigation, visible focus states, image descriptions, reduced-motion support, and light and dark themes. Images can be enlarged with a keyboard-accessible viewer.</p><p>Contact Kathryn through LinkedIn if you need another way to access the material.</p></section></div>`;
 }
 
 export const pages = [
   { path: 'index.html', route: '', title: 'Kathryn Patterson | Product Designer', description: 'Senior product designer in supply chain logistics. Explore Kathryn Patterson’s work in automotive logistics, user experience, and community-focused design.', content: home },
   { path: 'work/index.html', route: 'work/', current: 'work', title: 'Selected Work | Kathryn Patterson', description: 'Explore Central Dispatch mobile search and Cync, a community-focused iOS capstone.', content: work },
-  { path: 'work/central-dispatch/index.html', route: 'work/central-dispatch/', current: 'work', title: 'Central Dispatch | Kathryn Patterson', description: 'A public overview of Central Dispatch carrier mobile search, with published product documentation and Kathryn’s launch announcement.', content: dispatch },
-  { path: 'work/cync/index.html', route: 'work/cync/', current: 'work', title: 'Cync | Kathryn Patterson', description: 'A community-focused iOS capstone with documented research findings from a 10-person study.', content: cync },
+  { path: 'work/central-dispatch/index.html', route: 'work/central-dispatch/', current: 'work', title: 'Central Dispatch | Kathryn Patterson', description: 'A public overview of Central Dispatch carrier mobile search, with published product documentation and Kathryn’s launch announcement.', content: dispatch, social: { file: 'share-central-dispatch.jpg', alt: 'Central Dispatch mobile load search, with a screenshot of Quick Search.' } },
+  { path: 'work/cync/index.html', route: 'work/cync/', current: 'work', title: 'Cync | Kathryn Patterson', description: 'A community-focused iOS capstone with documented research findings from a 10-person study.', content: cync, social: { file: 'share-cync.jpg', alt: 'Cync, community research and an iOS capstone, with the original app screen.' } },
   { path: 'about/index.html', route: 'about/', current: 'about', title: 'About | Kathryn Patterson', description: 'Meet Kathryn Patterson, a senior product designer working in automotive logistics and user experience.', content: about },
   { path: 'site-info/index.html', route: 'site-info/', title: 'Site Information | Kathryn Patterson', description: 'Content sources, image credits, privacy, and accessibility information for Kathryn Patterson’s portfolio.', content: info }
 ];
